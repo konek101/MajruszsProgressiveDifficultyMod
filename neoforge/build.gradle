@@ -18,6 +18,10 @@ repositories {
         name = 'CurseMaven'
         url = 'https://www.cursemaven.com'
     }
+    maven {
+        name = 'Majrusz'
+        url = 'https://maven.majrusz.net/'
+    }
     flatDir { dirs 'libs' }
 }
 

@@ -14,6 +14,26 @@ minecraft {
 
 repositories {
     mavenCentral()
+    maven {
+        name = 'MixinSponge'
+        url = 'https://repo.spongepowered.org/maven'
+    }
+    maven {
+        name = 'MinecraftForge'
+        url = 'https://maven.minecraftforge.net/'
+    }
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'NeoForge'
+        url = 'https://maven.neoforged.net/releases'
+    }
+    maven {
+        name = 'Majrusz'
+        url = 'https://maven.majrusz.net/'
+    }
     flatDir { dirs 'libs' }
 }
 
