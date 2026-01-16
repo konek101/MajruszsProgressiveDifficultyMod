@@ -1,0 +1,54 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Upload Fabric artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fabric-build-${{ github.run_number }}
+          path: fabric/build/libs/*.jar
+          if-no-files-found: error
+
+      - name: Upload Forge artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-build-${{ github.run_number }}
+          path: forge/build/libs/*.jar
+          if-no-files-found: error
+
+      - name: Upload NeoForge artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: neoforge-build-${{ github.run_number }}
+          path: neoforge/build/libs/*.jar
+          if-no-files-found: error
