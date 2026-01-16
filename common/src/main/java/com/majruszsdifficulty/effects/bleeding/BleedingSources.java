@@ -186,7 +186,7 @@ public class BleedingSources {
 
 			private float getExtraChance( EnchantmentHelper.EnchantmentDef itemEnchantment ) {
 				for( EnchantmentDef enchantmentDef : this.enchantmentDefs ) {
-					if( enchantmentDef.id.matches( itemEnchantment.id.toString() ) ) {
+					if (enchantmentDef.id != null && enchantmentDef.id.matches( itemEnchantment.id.toString())) {
 						return itemEnchantment.level * enchantmentDef.chance;
 					}
 				}
