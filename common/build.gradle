@@ -18,8 +18,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
-    implementation "com.majruszlibrary:majrusz-library-common:${majruszlibrary_version}"
+    compileOnly files('libs/mixin-0.8.5.jar')
+    implementation files('libs/majrusz-library-common-1.20.1-7.0.4.jar')
+    mergetool files('libs/mergetool-1.2.3.jar')
 }
 
 java {
