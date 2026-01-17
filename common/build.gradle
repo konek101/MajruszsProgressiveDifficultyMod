@@ -1,20 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = 'Sponge'
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
-        }
-        maven {
-            name = 'MinecraftForge'
-            url = 'https://maven.minecraftforge.net/'
-        }
-    }
-}
-
 plugins {
     id 'java'
-    id 'org.spongepowered.gradle.vanilla' version '0.2.2'
+    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -24,7 +10,6 @@ base {
 
 minecraft {
     version(minecraft_version)
-    platform('joined')
 }
 
 repositories {
@@ -49,22 +34,12 @@ repositories {
         name = 'Mojang'
         url = 'https://libraries.minecraft.net/'
     }
-}
-
-afterEvaluate {
-    configurations.all {
-        if (it.canBeResolved) {
-            it.resolutionStrategy.eachDependency { details ->
-                // Force use of project repositories
-            }
-        }
-    }
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
-    compileOnly files('libs/mixin-0.8.5.jar')
-    implementation files('libs/majrusz-library-common-1.20.1-7.0.4.jar')
-    mergetool files('libs/mergetool-1.2.3.jar')
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    implementation "com.majruszlibrary:majrusz-library-common:${majruszlibrary_version}"
 }
 
 java {
